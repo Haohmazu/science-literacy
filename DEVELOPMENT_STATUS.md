@@ -71,3 +71,7 @@
 ## GitHub Pages 已部署與交付可用
 
 使用者完成 Pages 設定後，GitHub 回傳 built；網站 https://haohmazu.github.io/science-literacy/ 已上線。九個 HTTP 端點與來源比對通過，含 ZIP 及單檔 HTML，附件交付阻礙解除。實際瀏覽器互動與裝置版面仍未測，正式接受聲明尚待使用者。詳見 DEPLOYMENT_STATUS.md。
+
+## V2.0 第一階段獨立驗收
+
+使用者已授權 V2.0 第一階段；原始碼在 v2-stage1 分支，本階段驗收副本放於 main 的 v2-stage1/。正式 V1 根目錄網頁、腳本與下載包不變。新工作階段請先讀 v2-stage1/DEVELOPMENT_STATUS.md；第二階段尚未開始、未授權。發布不等同使用者驗收通過。

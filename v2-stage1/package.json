@@ -1,0 +1,16 @@
+{
+  "name": "science-literacy-design-platform",
+  "version": "2.0.0-stage1",
+  "private": true,
+  "description": "自然科學素養導向命題設計平台；網站本身免建置，npm 僅供維護測試",
+  "scripts": {
+    "check": "node --check app.js && node --check content.js && node --check stage2.js && node --check studio.js && node --check learning.js && node --check data-store.js && node --check workspace.js",
+    "test": "node tests/functional.cjs && node tests/stage2.cjs && node tests/stage3.cjs && node tests/v2-stage1.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "31.0.0"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  }
+}
