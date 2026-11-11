@@ -5,9 +5,14 @@
  const abilities=window.SCIENCE_CONTENT.studioOptions.abilities;
  const types=window.SCIENCE_CONTENT.studioOptions.types;
  const grades=window.SCIENCE_CONTENT.studioOptions.grades;
- const choices={grade:grades,semester:['上學期','下學期'],edition:['自編教材','南一版','康軒版','翰林版','其他版本'],literacy:['概念理解','情境應用','探究實作','證據論證'],mode:['analyze','rewrite','generate','review']};
+ const catalog=window.SCIENCE_CONTENT.studioOptions;
+ const choices={grade:grades,semester:catalog.semester,edition:catalog.edition,literacy:catalog.literacy,mode:catalog.mode};
  const modes={analyze:['原題分析','分析原題的科學概念、預定與實際評量能力、作答證據、各選項迷思、答案解析及限制。不要直接重寫或新增題目；藍圖僅作為對齊參照，原題不足以達成的目標須明示。'],rewrite:['改寫原題','保留原題核心科學概念，依命題藍圖改寫成指定題型與題數。列出改寫前後的差異、保留內容及修改理由，不改成與原概念無關的主題。'],generate:['生成新題','依單元、已教內容與命題藍圖生成全新試題，精確遵守各列題型、題數與配分；避免僅替換人名或數字。'],review:['AI 審題','審查原題與解析，逐項檢核：科學正確、目標對齊、情境必要、證據充分、變因控制、數據單位、答案唯一、誘答品質、適齡公平、來源與模擬標示。列出證據、問題、嚴重程度、修訂建議及待確認資訊；不得只給總分或宣稱已認證品質。藍圖只供對照，不要求虛構不存在的題目。']};
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ // 選項由統一目錄建立；保留首頁原本的預設選取值。
+ for(const [key,values] of Object.entries(choices)){const el=$(`#studio-${key}`),selected=el.value;el.innerHTML=values.map(value=>`<option value="${esc(value)}">${esc(key==='mode'?modes[value][0]:value)}</option>`).join('');el.value=values.includes(selected)?selected:values[0];}
+ const checkedAbilities=$$('[data-studio-ability]:checked').map(c=>c.value);
+ $('.ability-list').innerHTML='<legend>評量能力（至少一項）</legend>'+abilities.map(value=>`<label><input type="checkbox" data-studio-ability value="${esc(value)}" ${checkedAbilities.includes(value)?'checked':''}> ${esc(value)}</label>`).join('');
  function validate(s){
   const errors=[];if(!s||typeof s!=='object'||Array.isArray(s))return ['草稿資料格式不正確。'];
   for(const [key,values] of Object.entries(choices))if(!values.includes(s[key]))errors.push(`${key} 設定不在可用選項內。`);
