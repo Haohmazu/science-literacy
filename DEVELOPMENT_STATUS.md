@@ -63,3 +63,7 @@
 ## GitHub 儲存庫已由使用者建立
 
 已確認 Haohmazu/science-literacy 為空白公開儲存庫，admin／push 權限可用。建庫阻礙解除，依既有授權開始上傳及啟用 Pages。實際結果見 DEPLOYMENT_STATUS.md；正式產品驗收仍待使用者確認。
+
+## 原始碼已上傳，Pages 設定待使用者操作
+
+已將候選版與下載檔推送至 Haohmazu/science-literacy main。GitHub 建立 Pages API 回傳 403，網站尚未上線；使用者需在 Settings → Pages 選 main、/(root) 並儲存。原本「無法取得檔案」的阻礙已可用公開儲存庫下載排除。後續驗證依既有部署授權續行，勿再要求重複同意。

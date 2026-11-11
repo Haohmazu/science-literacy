@@ -140,3 +140,7 @@ python tools/package.py
 ## 公開儲存庫與下載
 
 使用者已建立並授權發布的儲存庫：https://github.com/Haohmazu/science-literacy 。首次部署結果見 DEPLOYMENT_STATUS.md。網站頁尾提供完整 ZIP 與單檔 HTML 下載；也可在 GitHub 按 Code → Download ZIP 取得原始碼。
+
+## 最新結果：檔案已可下載，Pages 尚未啟用
+
+程式已推送 main，可用 GitHub Code → Download ZIP 取得；單檔 HTML 及專案壓縮檔在 downloads/。Pages 建立 API 因連線權限回傳 403，請在 [Pages 設定](https://github.com/Haohmazu/science-literacy/settings/pages) 選 Deploy from a branch、main、/(root) 後儲存。這些最新狀態取代前文的歷史交付阻礙描述；尚未宣稱網站上線。
