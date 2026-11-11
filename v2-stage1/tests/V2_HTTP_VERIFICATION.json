@@ -1,0 +1,79 @@
+[
+  {
+    "path": "index.html",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 21780
+  },
+  {
+    "path": "styles.css",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 19588
+  },
+  {
+    "path": "content.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 14310
+  },
+  {
+    "path": "app.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 3935
+  },
+  {
+    "path": "stage2.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 8717
+  },
+  {
+    "path": "studio.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 14208
+  },
+  {
+    "path": "learning.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 3595
+  },
+  {
+    "path": "data-store.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 4664
+  },
+  {
+    "path": "workspace.js",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 12433
+  },
+  {
+    "path": "downloads/science-literacy-v2-stage1.zip",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 147097
+  },
+  {
+    "path": "downloads/science-literacy-v2-stage1-standalone.html",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 103063
+  },
+  {
+    "path": "TEST_REPORT.md",
+    "http": 200,
+    "matches_source": true,
+    "bytes": 7345
+  },
+  {
+    "path": "V1 root index.html",
+    "http": 200,
+    "matches_source": true
+  }
+]

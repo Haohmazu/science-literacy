@@ -59,3 +59,9 @@
 ## 後續工作階段必讀
 
 先讀本檔、TEST_REPORT.md、README、最新使用者訊息。僅允許第一階段修正與補驗；取得使用者明確驗收通過及下一階段授權後才可續行。完整需求若新增不同架構，先說明差異與影響，不擅自視為已確認。
+
+## 第一階段交付已發布，停止等待驗收
+
+驗收頁 https://haohmazu.github.io/science-literacy/v2-stage1/ 已可取得，Pages built、12 個 V2 HTTP 資源及線上 ZIP 檢查通過，V1 正式首頁未改版。完整結果見 TEST_REPORT.md／DEPLOYMENT_STATUS.md。
+
+本階段已提交，停止等待使用者驗收。實機測試與完整規格缺口仍明列；不得自行開始第二階段。
