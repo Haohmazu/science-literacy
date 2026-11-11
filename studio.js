@@ -2,9 +2,9 @@
 (() => {
  const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
  const KEY='science-literacy.studio.v1';
- const abilities=['科學概念理解','資料判讀','變因控制','證據推理','科學溝通'];
- const types=['單選題','多選題','簡答題','題組'];
- const grades=['國小三年級','國小四年級','國小五年級','國小六年級','國中七年級','國中八年級','國中九年級','高中一年級','高中二年級','高中三年級'];
+ const abilities=window.SCIENCE_CONTENT.studioOptions.abilities;
+ const types=window.SCIENCE_CONTENT.studioOptions.types;
+ const grades=window.SCIENCE_CONTENT.studioOptions.grades;
  const choices={grade:grades,semester:['上學期','下學期'],edition:['自編教材','南一版','康軒版','翰林版','其他版本'],literacy:['概念理解','情境應用','探究實作','證據論證'],mode:['analyze','rewrite','generate','review']};
  const modes={analyze:['原題分析','分析原題的科學概念、預定與實際評量能力、作答證據、各選項迷思、答案解析及限制。不要直接重寫或新增題目；藍圖僅作為對齊參照，原題不足以達成的目標須明示。'],rewrite:['改寫原題','保留原題核心科學概念，依命題藍圖改寫成指定題型與題數。列出改寫前後的差異、保留內容及修改理由，不改成與原概念無關的主題。'],generate:['生成新題','依單元、已教內容與命題藍圖生成全新試題，精確遵守各列題型、題數與配分；避免僅替換人名或數字。'],review:['AI 審題','審查原題與解析，逐項檢核：科學正確、目標對齊、情境必要、證據充分、變因控制、數據單位、答案唯一、誘答品質、適齡公平、來源與模擬標示。列出證據、問題、嚴重程度、修訂建議及待確認資訊；不得只給總分或宣稱已認證品質。藍圖只供對照，不要求虛構不存在的題目。']};
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -31,7 +31,7 @@
  function prompt(s){
   const errors=validate(s);if(errors.length)throw Error(errors.join('\n'));
   const total=totals(s.rows),task=modes[s.mode];
-  return [`自然科學素養導向命題協作｜${task[0]}`,'請以繁體中文回覆。你是協助教師的評量設計者，所有輸出仍須由教師查核。','',`【任務】\n${task[1]}`,'',`【教學條件】\n年級：${s.grade}\n學期：${s.semester}\n教材版本：${s.edition}\n學年度／教材名稱：${s.book.trim()||'未指定'}\n單元：${s.unit.trim()}\n素養命題模式：${s.literacy}\n評量能力：${s.abilities.join('、')}\n已教內容與先備能力：${s.taught.trim()}`,`課綱依據／學習重點：${s.curriculum.trim()||'未提供已查證原文。不得自行填造課綱代碼，請列待教師確認。'}`,'',`【命題藍圖】\n${s.rows.map((r,i)=>`${i+1}. 目標：${r.goal.trim()}；內容：${r.content.trim()}；能力：${r.ability}；題型：${r.type}；題數：${r.count}；每題 ${r.points} 分；小計 ${r.count*r.points} 分。`).join('\n')}\n總計 ${total.count} 題，${total.score} 分。題組的「一題」指一個計分小題；共同情境不另計分。`,s.original.trim()?`\n【教師提供的原題／待審資料】\n${s.original.trim()}${s.mode==='generate'?'\n本模式以上述原題作為參考，須生成新任務，避免只換數字。':''}`:'','',`【設計要求】\n1. 依已教內容與年級調整閱讀量，情境及資料必須參與解題。\n2. 整合學習內容、學習表現與跨科概念；未知資訊列待確認，不杜撰教材原文或課綱代碼。\n3. 科學概念、數據、單位、控制條件與推論範圍須一致。自編數據明示「模擬數據，非實測」。\n4. 單選題須有唯一最佳答案；多選題須交代選答數與計分方式；簡答題須有可接受表述與部分給分規準；題組須列各小題與配分。\n5. 若為出題或改題，逐題提供題幹、選項（適用時）、答案、解析、評量目標、誘答迷思或評分規準，以及限制。\n6. 無法確認的來源或科學敘述請明示；不得假裝已做實驗、檢索官方文件或完成教師審查。\n7. 若條件不足或互相衝突，先列問題與合理補充需求，不以猜測冒充確定結果。`].filter(x=>x!==undefined).join('\n');
+  return [`自然科學素養導向命題協作｜${task[0]}`,'請以繁體中文回覆。你是協助教師的評量設計者，所有輸出仍須由教師查核。',window.ScienceTaskContext?`【共用命題任務】\n${window.ScienceTaskContext()}`:'','',`【任務】\n${task[1]}`,'',`【教學條件】\n年級：${s.grade}\n學期：${s.semester}\n教材版本：${s.edition}\n學年度／教材名稱：${s.book.trim()||'未指定'}\n單元：${s.unit.trim()}\n素養命題模式：${s.literacy}\n評量能力：${s.abilities.join('、')}\n已教內容與先備能力：${s.taught.trim()}`,`課綱依據／學習重點：${s.curriculum.trim()||'未提供已查證原文。不得自行填造課綱代碼，請列待教師確認。'}`,'',`【命題藍圖】\n${s.rows.map((r,i)=>`${i+1}. 目標：${r.goal.trim()}；內容：${r.content.trim()}；能力：${r.ability}；題型：${r.type}；題數：${r.count}；每題 ${r.points} 分；小計 ${r.count*r.points} 分。`).join('\n')}\n總計 ${total.count} 題，${total.score} 分。題組的「一題」指一個計分小題；共同情境不另計分。`,s.original.trim()?`\n【教師提供的原題／待審資料】\n${s.original.trim()}${s.mode==='generate'?'\n本模式以上述原題作為參考，須生成新任務，避免只換數字。':''}`:'','',`【設計要求】\n1. 依已教內容與年級調整閱讀量，情境及資料必須參與解題。\n2. 整合學習內容、學習表現與跨科概念；未知資訊列待確認，不杜撰教材原文或課綱代碼。\n3. 科學概念、數據、單位、控制條件與推論範圍須一致。自編數據明示「模擬數據，非實測」。\n4. 單選題須有唯一最佳答案；多選題須交代選答數與計分方式；簡答題須有可接受表述與部分給分規準；題組須列各小題與配分。\n5. 若為出題或改題，逐題提供題幹、選項（適用時）、答案、解析、評量目標、誘答迷思或評分規準，以及限制。\n6. 無法確認的來源或科學敘述請明示；不得假裝已做實驗、檢索官方文件或完成教師審查。\n7. 若條件不足或互相衝突，先列問題與合理補充需求，不以猜測冒充確定結果。`].filter(x=>x!==undefined).join('\n');
  }
  // 純資料函式可供維護者測試，無網路或儲存副作用。
  window.ScienceStudioCore=Object.freeze({validate,totals,prompt});
@@ -55,14 +55,15 @@
  function storageFailure(action){$('#studio-status').textContent=`無法${action}本機草稿：瀏覽器可能禁止儲存、空間不足或使用檔案／無痕模式。目前畫面仍保留，請下載 TXT 備份。`;}
  $('#studio-form').addEventListener('submit',e=>{e.preventDefault();refresh();});$('#studio-form').addEventListener('input',refresh);$('#studio-form').addEventListener('change',refresh);
  $('#add-blueprint').addEventListener('click',()=>{if($$('[data-blueprint-row]').length>=20)return;addRow();refresh();});
- $('#save-studio').addEventListener('click',()=>{if(!refresh())return;try{const payload={schema:1,savedAt:new Date().toISOString(),settings:collect()};localStorage.setItem(KEY,JSON.stringify(payload));$('#studio-status').textContent='本機草稿已儲存。僅此瀏覽器與網址可讀取，未傳送資料。';}catch{storageFailure('儲存');}});
+ $('#save-studio').addEventListener('click',()=>{if(window.SciencePersistence){window.SciencePersistence.save();return;}if(!refresh())return;try{const payload={schema:1,savedAt:new Date().toISOString(),settings:collect()};localStorage.setItem(KEY,JSON.stringify(payload));$('#studio-status').textContent='本機草稿已儲存。僅此瀏覽器與網址可讀取，未傳送資料。';}catch{storageFailure('儲存');}});
  $('#load-studio').addEventListener('click',()=>{
+  if(window.SciencePersistence){window.SciencePersistence.load();return;}
   let raw;try{raw=localStorage.getItem(KEY);}catch{storageFailure('讀取');return;}
   if(!raw){$('#studio-status').textContent='目前沒有已儲存的本機草稿。';return;}
   try{if(raw.length>50000)throw Error('too large');const p=JSON.parse(raw);if(!p||p.schema!==1||typeof p.savedAt!=='string'||!Number.isFinite(Date.parse(p.savedAt))||validate(p.settings).length)throw Error('invalid');apply(p.settings);$('#studio-status').textContent='已讀取本機草稿，提示詞已更新。';}
   catch{$('#studio-status').textContent='草稿格式損壞、版本不相容或設定無效，未套用也未刪除；目前畫面保留。';}
  });
- $('#clear-studio').addEventListener('click',()=>{try{localStorage.removeItem(KEY);$('#studio-status').textContent='已清除已存草稿，目前畫面設定保留。其他網站資料未刪除。';}catch{storageFailure('清除');}});
+ $('#clear-studio').addEventListener('click',()=>{if(window.SciencePersistence){window.SciencePersistence.clear();return;}try{localStorage.removeItem(KEY);$('#studio-status').textContent='已清除已存草稿，目前畫面設定保留。其他網站資料未刪除。';}catch{storageFailure('清除');}});
  $('#copy-studio').addEventListener('click',async()=>{
   if(!refresh())return;const text=$('#studio-preview').value;
   try{if(!window.isSecureContext||!navigator.clipboard)throw Error('unavailable');await navigator.clipboard.writeText(text);$('#studio-copy-status').textContent='提示詞已複製，請貼入外部 AI 工具。';}
@@ -74,6 +75,7 @@
   catch{$('#studio-copy-status').textContent='瀏覽器無法啟動下載，請使用複製提示詞備份。';}
   finally{a?.remove();if(url)setTimeout(()=>URL.revokeObjectURL(url),1000);}
  });
+ window.ScienceStudio={snapshot:collect,restore:apply,refresh};
  addRow({goal:'比較資料並選擇有證據的結論',content:'水的蒸發與風的條件',ability:'資料判讀',type:'單選題',count:3,points:5});
  addRow({goal:'引用資料解釋並限制推論',content:'蒸發量與控制變因',ability:'證據推理',type:'簡答題',count:1,points:10});refresh();
 })();

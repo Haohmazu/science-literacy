@@ -1,10 +1,7 @@
 'use strict';
-const data = window.SCIENCE_CONTENT;
-const examples = [
- {title:'植物生長',basic:'植物製造養分需要哪一種能量？',answer:'光能。這類提問可檢查概念記憶，尚未要求使用觀察資料。',applied:'同種、初始大小相近的幼苗各 10 株，分成兩組；土壤、水分、溫度與觀察時間相同，只有光照條件不同。兩週後，有光組平均增加 4 片葉，無光組平均增加 1 片葉。這些紀錄支持「在本實驗條件下，光照會影響葉片增加數」嗎？請引用資料說明。',analysis:'支持。兩組平均增加數分別為 4 與 1 片，且其他列明條件相同，因此資料支持本實驗條件下光照與葉片增加的差異。不能把葉片數直接當作光合作用速率，也不能推論所有植物在所有環境都相同。',difference:'記憶題辨識光能；情境題要求比較資料、辨識控制條件，並限制推論範圍。若刪去觀察數據仍能作答，便應再檢查資料是否真的參與推理。'},
- {title:'材料導熱',basic:'金屬通常是熱的良導體，還是不良導體？',answer:'良導體。這類提問檢查材料導熱性概念，不直接評量實驗資料判讀。',applied:'在相同環境中，將長度、粗細相同的金屬棒與木棒，一端接觸相同溫度的熱源。在距離熱源相同的位置測溫：起始皆為 25°C，3 分鐘後金屬棒為 42°C，木棒為 28°C。哪一種材料在這次實驗中傳熱較快？請以溫度變化支持判斷。',analysis:'金屬棒。相同時間內測點溫度上升 17°C，木棒上升 3°C，在題目所列控制條件下支持金屬傳熱較快。這些數據不足以計算導熱係數，也不能推出金屬本身會產生熱。',difference:'記憶題判斷材料性質；情境題需計算溫度變化並比較證據。應交代測點與熱源條件，避免單看最終溫度而忽略起始條件。'}
-];
-let currentExample = 0;
+const data = window.ScienceData?.content || window.SCIENCE_CONTENT;
+const examples = data.comparisons;
+let currentExample = 0, currentStep = 0;
 function renderComparison(index) {
  currentExample = index;
  const e = examples[index];
@@ -16,6 +13,7 @@ function renderComparison(index) {
  document.querySelector('#reveal').textContent = '查看命題差異 ＋';
 }
 function renderStep(index) {
+ currentStep = index;
  document.querySelectorAll('[data-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.step) === index)));
  const s=data.steps[index];
  document.querySelector('#step-panel').innerHTML=`<div class="big">0${index+1}</div><h3>${s[0]}</h3><b>${s[1]}</b><p>${s[2]}</p><div class="output">${s[3]}</div>`;
@@ -46,3 +44,5 @@ document.querySelector('#reveal').addEventListener('click',()=>{
  document.querySelector('#reveal').textContent=panel.hidden?'查看命題差異 ＋':'收起命題差異 −';
 });
 renderComparison(0);renderStep(0);
+
+window.ScienceBasics={snapshot:()=>({example:currentExample,step:currentStep,revealed:!document.querySelector('#compare-analysis').hidden}),restore:s=>{renderComparison(s.example);renderStep(s.step);document.querySelector('#compare-analysis').hidden=!s.revealed;document.querySelector('#reveal').setAttribute('aria-expanded',String(s.revealed));document.querySelector('#reveal').textContent=s.revealed?'收起命題差異 −':'查看命題差異 ＋';}};

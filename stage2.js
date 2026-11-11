@@ -1,6 +1,6 @@
 'use strict';
 (() => {
- const content=window.SCIENCE_CONTENT, demo=content.evaporation;
+ const content=window.ScienceData?.content || window.SCIENCE_CONTENT, demo=content.evaporation;
  const answers={};let active=0;
  const $=s=>document.querySelector(s);
  const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -41,7 +41,7 @@
  function reviewText(){
   const target=$('#review-target').selectedOptions[0].textContent,name=$('#reviewer').value.trim()||'未填寫';
   const checks=[...document.querySelectorAll('[data-review]')];
-  return ['自然科學命題審查紀錄','本站教學檢核；非 AI 自動審查或品質認證',`審查對象：${target}`,`審查者：${name}`,`已查核：${checks.filter(c=>c.checked).length} / ${checks.length}；勾選不代表試題自動合格。`,'',...content.reviewChecklist.map((r,i)=>`${checks[i].checked?'[已查核]':'[待檢核]'} ${i+1}. ${r[0]}\n判斷重點：${r[2]}`),'',`證據與修訂建議：\n${$('#review-notes').value.trim()||'尚未填寫'}`,'','限制：示例為預寫，數據如有標示為模擬則非實測；課綱、科學正確性及適齡性仍須教師查核。'].join('\n');
+  return ['自然科學命題審查紀錄',...(window.ScienceTaskContext?[window.ScienceTaskContext()]:[]),'本站教學檢核；非 AI 自動審查或品質認證',`審查對象：${target}`,`審查者：${name}`,`已查核：${checks.filter(c=>c.checked).length} / ${checks.length}；勾選不代表試題自動合格。`,'',...content.reviewChecklist.map((r,i)=>`${checks[i].checked?'[已查核]':'[待檢核]'} ${i+1}. ${r[0]}\n判斷重點：${r[2]}`),'',`證據與修訂建議：\n${$('#review-notes').value.trim()||'尚未填寫'}`,'','限制：示例為預寫，數據如有標示為模擬則非實測；課綱、科學正確性及適齡性仍須教師查核。'].join('\n');
  }
  function updateReview(){const n=document.querySelectorAll('[data-review]:checked').length;$('#review-count').textContent=`已查核 ${n} / 10 項；尚有 ${10-n} 項待檢核。`;$('#review-output').value=reviewText();$('#review-copy-status').textContent='';$('#review-copy-manual').hidden=true;$('#review-copy-text').value='';}
  $('#original-question').innerHTML=question(demo.questions[0]);bindQuiz($('#original-question'));
@@ -56,4 +56,7 @@
  $('#export-review').addEventListener('click',()=>{updateReview();$('#review-output').focus();$('#review-output').select();$('#review-copy-status').textContent='已匯出完整審題文字至預覽框，可選取後複製留存。';});
  $('#copy-review').addEventListener('click',()=>copy(reviewText(),'review-copy'));
  renderDemo(0);renderCompare();updateReview();
+
+ window.ScienceDemo={snapshot:()=>({active,answers:JSON.parse(JSON.stringify(answers)),compare:[...document.querySelectorAll('[data-compare]:checked')].map(c=>c.dataset.compare)}),restore:s=>{Object.keys(answers).forEach(k=>delete answers[k]);Object.assign(answers,JSON.parse(JSON.stringify(s.answers)));$('#original-question').innerHTML=question(demo.questions[0]);bindQuiz($('#original-question'));renderDemo(s.active);document.querySelectorAll('[data-compare]').forEach(c=>c.checked=s.compare.includes(c.dataset.compare));renderCompare();}};
+ window.ScienceReview={snapshot:()=>({target:$('#review-target').value,reviewer:$('#reviewer').value,notes:$('#review-notes').value,checks:[...document.querySelectorAll('[data-review]')].map(c=>c.checked)}),restore:s=>{$('#review-target').value=s.target;$('#reviewer').value=s.reviewer;$('#review-notes').value=s.notes;document.querySelectorAll('[data-review]').forEach((c,i)=>c.checked=s.checks[i]);updateReview();}};
 })();
