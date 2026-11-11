@@ -67,3 +67,7 @@
 ## 原始碼已上傳，Pages 設定待使用者操作
 
 已將候選版與下載檔推送至 Haohmazu/science-literacy main。GitHub 建立 Pages API 回傳 403，網站尚未上線；使用者需在 Settings → Pages 選 main、/(root) 並儲存。原本「無法取得檔案」的阻礙已可用公開儲存庫下載排除。後續驗證依既有部署授權續行，勿再要求重複同意。
+
+## GitHub Pages 已部署與交付可用
+
+使用者完成 Pages 設定後，GitHub 回傳 built；網站 https://haohmazu.github.io/science-literacy/ 已上線。九個 HTTP 端點與來源比對通過，含 ZIP 及單檔 HTML，附件交付阻礙解除。實際瀏覽器互動與裝置版面仍未測，正式接受聲明尚待使用者。詳見 DEPLOYMENT_STATUS.md。

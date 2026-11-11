@@ -144,3 +144,7 @@ python tools/package.py
 ## 最新結果：檔案已可下載，Pages 尚未啟用
 
 程式已推送 main，可用 GitHub Code → Download ZIP 取得；單檔 HTML 及專案壓縮檔在 downloads/。Pages 建立 API 因連線權限回傳 403，請在 [Pages 設定](https://github.com/Haohmazu/science-literacy/settings/pages) 選 Deploy from a branch、main、/(root) 後儲存。這些最新狀態取代前文的歷史交付阻礙描述；尚未宣稱網站上線。
+
+## 已上線：最新狀態
+
+網站已成功發布：https://haohmazu.github.io/science-literacy/ 。首頁、必要 CSS／JS、專案 ZIP 及單檔 HTML 皆以 HTTP 200 驗證且與來源一致。可在網站頁尾下載檔案。此更新取代前文「尚未啟用 Pages／無法下載」的歷史狀態；實際瀏覽器操作及正式產品驗收仍待確認。

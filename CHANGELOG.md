@@ -39,3 +39,9 @@
 - 依使用者明確授權推送候選版至 Haohmazu/science-literacy main。
 - 提供 downloads/ 的專案 ZIP 與單檔 HTML。
 - Pages 啟用 API 遭 GitHub 403 拒絕，待使用者在設定頁啟用；尚未驗證網站上線。
+
+## GitHub Pages 正式可供驗收 — 2026-11-11
+
+- 使用者完成 Pages 設定；GitHub 建置成功。
+- 首頁及八個必要資源／下載端點 HTTP 200，與部署來源一致。
+- 網站及 ZIP、單檔 HTML 已公開可取得，保留實機與正式驗收限制。

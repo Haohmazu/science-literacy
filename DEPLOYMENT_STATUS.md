@@ -1,20 +1,26 @@
 # GitHub Pages 部署狀態
 
-更新：2026-11-11（臺北）。使用者已明確授權公開儲存庫及 GitHub Pages 發布。
+更新：2026-11-11（臺北）。
 
-## 已完成
+**部署已完成，HTTP 驗證通過。**
 
-- 使用者已建立公開儲存庫：https://github.com/Haohmazu/science-literacy 。
-- 已確認 admin／push 權限，初始儲存庫為空；未覆蓋其他網站。
-- 網站、文件、測試及 downloads/ 已推送 main；首筆提交 b6a5039。
-- 可從 GitHub Code → Download ZIP 取得全部檔案，或直接下載 downloads/ 中的專案 ZIP 與單檔 HTML。
+- 網站：https://haohmazu.github.io/science-literacy/
+- 儲存庫：https://github.com/Haohmazu/science-literacy
+- Pages 來源：main 分支、/(root)，build_type legacy。
+- GitHub 回傳狀態 built，建置錯誤為 null。
+- 本次驗證的應用程式提交：140d94a63849e681f957ee51c48b50e438ff4ab2。
+- 首頁、styles.css、content.js、app.js、stage2.js、studio.js、learning.js、ZIP 與單檔 HTML 共九個 HTTP 端點皆為 200，內容與部署原始檔逐位元組一致。ZIP 亦通過完整性檢查。
 
-## 尚未完成：啟用 Pages
+## 取得成果
 
-POST /repos/Haohmazu/science-literacy/pages 回傳 HTTP 403 Resource not accessible by integration。管理／推送權限不代表連線權杖具有 Pages 設定權限。沒有宣稱網站已上線；不是使用者未授權，也不是自動審核拒絕。
+- 完整專案：https://haohmazu.github.io/science-literacy/downloads/science-literacy-v1.0-review.zip
+- 單檔 HTML：https://haohmazu.github.io/science-literacy/downloads/science-literacy-standalone.html
+- 網站頁尾亦提供兩個下載連結；下載 ZIP 解壓後開啟 science-literacy/index.html。
 
-請使用者開啟 https://github.com/Haohmazu/science-literacy/settings/pages ，在 Build and deployment 選 Deploy from a branch，分支 main、資料夾 /(root)，按 Save。啟用後才會開始 Pages 建置，網址應以 GitHub 回傳及實際 HTTP 檢查結果確認。使用者完成後可繼續驗證，無須重新詢問發布同意。
+## 授權與驗證限制
 
-## 驗證範圍
+使用者明確授權公開建立儲存庫及發布，並自行完成建庫、Pages 分支設定，先前 403 阻礙已解除。
 
-五份 JS 語法及 315 項主要 DOM 斷言已重新通過；另有單檔 6 項既有斷言。真實瀏覽器、Windows 與 GitHub Pages 線上驗證尚未完成。發布或可下載不等同產品正式驗收通過。
+五份 JS 語法與 315 項主要 DOM 斷言已重跑通過，另有單檔六項既有測試。本次新增驗證為 GitHub Pages 建置狀態及 HTTP 資源內容，不是實際瀏覽器互動、Windows 或手機渲染測試。那些限制仍保留。
+
+網站已公開可供驗收；發布不代表使用者已正式接受 V1.0。未開始任何新版本擴充。
