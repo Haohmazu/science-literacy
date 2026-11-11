@@ -5,6 +5,7 @@ const {w,d,errors}=setup(),$=s=>d.querySelector(s),all=s=>[...d.querySelectorAll
 function set(s,v,event='input'){const e=$(s);e.value=v;e.dispatchEvent(new w.Event(event,{bubbles:true}));}
 const key='science-literacy.workspace.v2',legacy='science-literacy.studio.v1';
 (async()=>{
+ok(all('#studio-grade option').map(o=>o.value).join('|')===w.SCIENCE_CONTENT.studioOptions.grades.join('|'),'工作室選項來自統一目錄');ok(all('[data-studio-ability]').map(o=>o.value).join('|')===w.SCIENCE_CONTENT.studioOptions.abilities.join('|'),'能力選項來自統一目錄');
 ok(all('#main-tabs [role="tab"]').length===4,'四個主頁籤');ok(all('.sub-tabs [role="tab"]').length===9,'九個次頁籤含首頁');ok(!$('#home').hidden&&$('#m06').hidden,'初始首頁且工作室隱藏');ok(all('.module-panel').length===9,'M01～M08 全保留');ok(all('.module-disclosure').length>=10,'第三層可展開區塊');ok($('#task-heading').textContent==='我的命題任務','共用任務卡存在');
 for(const group of ['learn','collaborate','resources','home']){click(`[data-main-tab="${group}"]`);ok($(`#main-tab-${group}`).getAttribute('aria-selected')==='true','主頁籤 aria-selected 正確');ok(all('#main-tabs [tabindex="0"]').length===1,'主頁籤唯一鍵盤入口');}
 const original=$('#original-question'),studio=$('#studio-form');
